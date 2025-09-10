@@ -37,3 +37,66 @@ python setup.py build_ext --inplace
 
 # 4) Run the GUI
 python Main.py
+TSV Merger
+Run interactively:
+
+bash
+Copy code
+python TSV-Merger.py
+# Prompts:
+#  - Directory containing FF .tsv files
+#  - Database FASTA used for alignment
+#  - Which files to include
+#  - Output filename
+# Output: Joined_Results/<name>.tsv and optionally <name>_checked.tsv
+Annotate a merged file directly (CLI):
+
+bash
+Copy code
+python check_origins.py -m path/to/merged.tsv -d path/to/database.fasta -o path/to/merged_checked.tsv
+Packaging the GUI (optional)
+To build a Windows executable with your existing .spec:
+
+bash
+Copy code
+pyinstaller FragmentFinder.spec
+Or build from scratch:
+
+bash
+Copy code
+pyinstaller --onefile --windowed --add-data "loading.gif;." Main.py
+On macOS/Linux, replace the semicolon (;) with a colon (:) in --add-data.
+
+Repository layout (suggested)
+graphql
+Copy code
+fragment-finder/
+├─ src/                      # GUI + Cython
+│  ├─ Main.py
+│  ├─ Util.py
+│  ├─ Procedure.pyx
+│  ├─ setup.py
+│  └─ loading.gif
+├─ tools/                    # utilities
+│  ├─ TSV-Merger.py
+│  └─ check_origins.py
+├─ data/                     # sample inputs/outputs (gitignored)
+│  └─ .gitkeep
+├─ requirements.txt
+└─ README.md
+Contributing
+Issues and PRs are welcome—especially improvements to documentation, tests, cross-platform builds, and UI/UX. Consider adding CI (GitHub Actions) to build the Cython module on Windows/macOS/Linux.
+
+License
+GPL. See LICENSE for details.
+
+Acknowledgments
+Borchert Lab, University of South Alabama — hosting, collaboration, and downloads:
+https://www.southalabama.edu/biology/borchertlab/
+
+Open-source tools that make this possible: Python, PyQt5, Cython, NumPy/SciPy, matplotlib, Biopython, pyahocorasick.
+
+perl
+Copy code
+::contentReference[oaicite:0]{index=0}
+ ​:contentReference[oaicite:1]{index=1}​
